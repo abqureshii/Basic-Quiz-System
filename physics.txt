@@ -1,0 +1,68 @@
+What is the value of gravitational acceleration
+9.81 m/s^2
+3.8m/s^2
+1.6m/s^2
+None of these
+A
+
+What is not true about momentum?
+It is a product of mass time velocity
+It is a vector quantity whose direction is the same as velocity
+Its physical dimensions are MLT^-2
+Its SI unit is kgms^-1
+C
+
+Which of the following is not a fundamental force of nature?
+Weak nuclear force
+Strong nuclear force
+Cohesive force
+Electromagnetism
+C
+
+A fictitious outward force on a particle rotating about it’s axis is
+Centrifugal force
+Frictional force
+Centripetal Force
+Viscous Drag
+A
+
+Which is not a unit of force?
+Dyne
+Newton
+Pound
+Kilogram Weight
+D
+
+Value of gravitational constant G is
+6.67 x 10^-11
+9 X 10^9
+8.85 X 10^-12
+6.02 X 10^23
+A
+
+Maxwell first equation is called
+Gauss's law
+Ampere's law
+Faraday's law of induction
+Gauss's law for magnetism
+A
+
+Eddy Current's are a consequence of: 
+Lenz's law
+Ampere's law
+Electromagnetic Induction
+Gauss's Law
+A
+
+Gauss's is valid only if
+Charge is conserved
+Field lines don't cross each other.
+There is symmetry around the charged surface.
+Electric Potential is zero inside the surface.
+D
+
+If a length of simple pendulum is doubled then the time period of oscillation is 
+Doubled
+Halved
+Increase by factor of sqrt(2)
+Decrease by factor of sqrt(2)
