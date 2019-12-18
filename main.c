@@ -4,12 +4,13 @@
 #include <ctype.h>
 
 #include "delay.h" //includes the delay function used to introduce delay in the program
-#include "questions.h"
-#include "functions.h"
+#include "count_questions.h" // Includes fucntion used to count the number of questions in each file.
+#include "functions.h" // Include fucntion which displays question and take input from user.
 #include "grade.h" // Includes the grade function used to calculate grade by giving percentage as input.
 
 int main ()
 {
+srand(time(NULL)); // Set the seed for rand function.
 char student_name[40];
 char full_name[40];
 char *first_name;
@@ -36,10 +37,10 @@ int maths_quiz = 0, maths_correct = 0;
 int physics_quiz = 0, physics_correct = 0;
 int chemistry_quiz = 0, chemistry_correct = 0;
 
-printf ("Welcome %s!", first_name);
+printf ("Welcome %s!\n\n", first_name);
 while (maths_quiz==0 || physics_quiz==0 || chemistry_quiz==0)
 {
-printf ("\n\nSelect the subject you want to take quiz\n");
+printf ("Select the subject you want to take quiz\n");
 printf ("1. Maths\t\t");
 printf ("2. Physics\n");
 printf ("3. Chemistry\t\t");
@@ -48,10 +49,10 @@ printf ("Enter 0 to end the quiz.\n");
 
 int selection;
 fflush(stdin);
-scanf ("%d", &selection);
+scanf ("%d", &selection); // Choose the subject.
 if (selection==0)
 {
-    break;
+    break;   // The while loop is exited when user enter 0.
 }
 
 
@@ -114,10 +115,12 @@ float total_percentage = (maths_percentage+physics_percentage+chemistry_percenta
 /*The result is printed when loop is exited.
 In the result, grade function is used to calculate the grade for a given percentage.*/
 
+/* Used printf statement to display the result to user on console. */
+
 system ("cls");
-printf ("                                 +-+-+-+-+-+-+\n");
-printf ("                                 |R|E|S|U|L|T|\n");
-printf ("                                 +-+-+-+-+-+-+\n\n");
+printf ("           +-+-+-+-+-+-+\n");
+printf ("           |R|E|S|U|L|T|\n");
+printf ("           +-+-+-+-+-+-+\n\n");
 printf ("Student Name:\t %s\n", full_name);
 printf ("Roll No:\t %s\n\n", roll_no);
 
@@ -128,6 +131,23 @@ printf ("Chemistry\t%d/%d\t\t%c\n",chemistry_correct, num_of_chemistryquestions,
 printf ("****************************************\n");
 printf ("Total\t\t%d/%d\t\t%c\n",maths_correct+physics_correct+chemistry_correct, num_of_chemistryquestions+num_of_mathquestions+num_of_physicsquestions, grade(total_percentage));
 printf ("****************************************\n");
+
+/*Also use fprintf to save the results into a file.*/
+FILE *fp; // Declare file pointer fp.
+fp = fopen ("result.txt", "w"); // Save the results in result.txt file.
+
+fprintf (fp, "Student Name:\t %s\n", full_name);
+fprintf (fp, "Roll No:\t %s\n\n", roll_no);
+
+fprintf (fp, "Subject\t\tScore\t\tGrade\n\n");
+fprintf (fp,"Math\t\t%d/%d\t\t%c\n",maths_correct, num_of_mathquestions,grade(maths_percentage));
+fprintf (fp, "Physics\t\t%d/%d\t\t%c\n",physics_correct, num_of_physicsquestions,grade(physics_percentage));
+fprintf (fp, "Chemistry\t%d/%d\t\t%c\n",chemistry_correct, num_of_chemistryquestions,grade (chemistry_percentage));
+fprintf (fp, "****************************************\n");
+fprintf (fp, "Total\t\t%d/%d\t\t%c\n",maths_correct+physics_correct+chemistry_correct, num_of_chemistryquestions+num_of_mathquestions+num_of_physicsquestions, grade(total_percentage));
+fprintf (fp, "****************************************\n");
+
+fclose (fp);
 
 system ("pause");
 

@@ -1,0 +1,12 @@
+Student Name:	 Abdullah Qureshi
+
+Roll No:	 123121
+
+Subject		Score		Grade
+
+Math		1/10		F
+Physics		0/10		F
+Chemistry	0/10		F
+****************************************
+Total		1/30		F
+****************************************
