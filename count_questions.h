@@ -71,3 +71,47 @@ fclose (fp);
 
 return i;
 }
+
+int nof_history (void)
+{
+int i=0 ,j=0;
+char history_question[20][7][200]; // Declare an array to store math questions and options also correct answer.
+
+FILE * fp;
+fp = fopen("history.txt", "r");
+
+while (!feof(fp)) // File end of file function is used so loop runs until the pointer reaches the end of file.
+{
+    for (j=0; j<7; j++)
+    {
+        fgets (history_question[i][j], 200, fp);
+        strtok(history_question[i][j], "\n"); //Strtok function is used to remove the '\n' character from end of string.
+    }
+    i++;
+}
+fclose (fp);
+
+return i;
+}
+
+int nof_biology (void)
+{
+int i=0 ,j=0;
+char biology_question[20][7][200]; // Declare an array to store math questions and options also correct answer.
+
+FILE * fp;
+fp = fopen("biology.txt", "r");
+
+while (!feof(fp)) // File end of file function is used so loop runs until the pointer reaches the end of file.
+{
+    for (j=0; j<7; j++)
+    {
+        fgets (biology_question[i][j], 200, fp);
+        strtok(biology_question[i][j], "\n"); //Strtok function is used to remove the '\n' character from end of string.
+    }
+    i++;
+}
+fclose (fp);
+
+return i;
+}

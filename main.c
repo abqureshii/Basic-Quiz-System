@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <windows.h>
 
-#include "delay.h" //includes the delay function used to introduce delay in the program
 #include "count_questions.h" // Includes fucntion used to count the number of questions in each file.
 #include "functions.h" // Include fucntion which displays question and take input from user.
 #include "grade.h" // Includes the grade function used to calculate grade by giving percentage as input.
@@ -36,20 +36,23 @@ and result is printed.
 int maths_quiz = 0, maths_correct = 0;
 int physics_quiz = 0, physics_correct = 0;
 int chemistry_quiz = 0, chemistry_correct = 0;
+int history_quiz =0, history_correct = 0;
+int biology_quiz = 0, biology_correct = 0;
 
 printf ("Welcome %s!\n\n", first_name);
-while (maths_quiz==0 || physics_quiz==0 || chemistry_quiz==0)
+while (maths_quiz==0 || physics_quiz==0 || chemistry_quiz==0 || history_quiz == 0 || biology_quiz == 0)
 {
 printf ("Select the subject you want to take quiz\n");
 printf ("1. Maths\t\t");
 printf ("2. Physics\n");
 printf ("3. Chemistry\t\t");
-printf ("4. History\n\n");
+printf ("4. History\n");
+printf ("5. Biology\n\n");
 printf ("Enter 0 to end the quiz.\n");
 
 int selection;
-fflush(stdin);
 scanf ("%d", &selection); // Choose the subject.
+fflush(stdin);
 if (selection==0)
 {
     break;   // The while loop is exited when user enter 0.
@@ -65,7 +68,7 @@ switch (selection)
             }
             else
             {   printf ("You have already taken Math's quiz. Choose another option.\n");
-                delay(1000);
+                Sleep(1000);
             }
             break;
 
@@ -76,22 +79,42 @@ switch (selection)
             }
             else
             {   printf ("You have already taken Physics quiz. Choose another option.\n");
-                delay(1000);
+                Sleep(1000);
             }
             break;
 
     case 3: if (chemistry_quiz == 0)
             {   system ("cls");
-                physics_correct = chemistry();
+                chemistry_correct = chemistry();
                 chemistry_quiz = 1;
             }
             else
-            {   printf ("You have already taken Physics quiz. Choose another option.\n");
-                delay(1000);
+            {   printf ("You have already taken Chemistry quiz. Choose another option.\n");
+                Sleep(1000);
+            }
+            break;
+    case 4: if (history_quiz == 0)
+            {   system ("cls");
+                history_correct = history();
+                history_quiz = 1;
+            }
+            else
+            {   printf ("You have already taken History quiz. Choose another option.\n");
+                Sleep(1000);
+            }
+            break;
+    case 5: if (biology_quiz == 0)
+            {   system ("cls");
+                biology_correct = biology();
+                biology_quiz = 1;
+            }
+            else
+            {   printf ("You have already taken Biology quiz. Choose another option.\n");
+                Sleep(1000);
             }
             break;
     default: printf ("Please enter a valid option.\n");
-             delay (1000);
+             Sleep (1000);
              break;
 
 }
@@ -99,7 +122,11 @@ system ("cls");
 }
 int num_of_mathquestions = nof_maths();
 int num_of_physicsquestions = nof_physics();
-int num_of_chemistryquestions = nof_chemistry();
+int  num_of_chemistryquestions =  nof_chemistry();
+int num_of_historyquestions = nof_history();
+int num_of_biologyquestions = nof_biology();
+
+
 
 float maths_percentage;
 maths_percentage = (float)maths_correct/(float)num_of_mathquestions; // Calculate percentage for maths.
@@ -110,7 +137,13 @@ physics_percentage = (float)physics_correct/(float)num_of_physicsquestions; //Ca
 float chemistry_percentage;
 chemistry_percentage = (float)chemistry_correct/(float)num_of_chemistryquestions; //Calculate percentage for chemistry.
 
-float total_percentage = (maths_percentage+physics_percentage+chemistry_percentage)/3; // Calculate total percentage.
+float history_percentage;
+history_percentage = (float)history_correct/(float)num_of_historyquestions; //Calculate percentage for chemistry.
+
+float biology_percentage;
+biology_percentage = (float)biology_correct/(float)num_of_biologyquestions; //Calculate percentage for chemistry.
+
+float total_percentage = (maths_percentage+physics_percentage+chemistry_percentage+history_percentage+biology_percentage)/5; // Calculate total percentage.
 
 /*The result is printed when loop is exited.
 In the result, grade function is used to calculate the grade for a given percentage.*/
@@ -128,13 +161,15 @@ printf ("Subject\t\tScore\t\tGrade\n\n");
 printf ("Math\t\t%d/%d\t\t%c\n",maths_correct, num_of_mathquestions,grade(maths_percentage));
 printf ("Physics\t\t%d/%d\t\t%c\n",physics_correct, num_of_physicsquestions,grade(physics_percentage));
 printf ("Chemistry\t%d/%d\t\t%c\n",chemistry_correct, num_of_chemistryquestions,grade (chemistry_percentage));
+printf ("History\t\t%d/%d\t\t%c\n",history_correct, num_of_historyquestions,grade (history_percentage));
+printf ("Biology\t\t%d/%d\t\t%c\n",biology_correct, num_of_biologyquestions,grade (biology_percentage));
 printf ("****************************************\n");
-printf ("Total\t\t%d/%d\t\t%c\n",maths_correct+physics_correct+chemistry_correct, num_of_chemistryquestions+num_of_mathquestions+num_of_physicsquestions, grade(total_percentage));
+printf ("Total\t\t%d/%d\t\t%c\n",maths_correct+physics_correct+chemistry_correct+history_correct+biology_correct, num_of_chemistryquestions+num_of_mathquestions+num_of_physicsquestions+num_of_historyquestions+num_of_biologyquestions, grade(total_percentage));
 printf ("****************************************\n");
 
 /*Also use fprintf to save the results into a file.*/
 FILE *fp; // Declare file pointer fp.
-fp = fopen ("result.txt", "w"); // Save the results in result.txt file.
+fp = fopen ("result.txt", "w+"); // Save the results in result.txt file.
 
 fprintf (fp, "Student Name:\t %s\n", full_name);
 fprintf (fp, "Roll No:\t %s\n\n", roll_no);
@@ -143,8 +178,10 @@ fprintf (fp, "Subject\t\tScore\t\tGrade\n\n");
 fprintf (fp,"Math\t\t%d/%d\t\t%c\n",maths_correct, num_of_mathquestions,grade(maths_percentage));
 fprintf (fp, "Physics\t\t%d/%d\t\t%c\n",physics_correct, num_of_physicsquestions,grade(physics_percentage));
 fprintf (fp, "Chemistry\t%d/%d\t\t%c\n",chemistry_correct, num_of_chemistryquestions,grade (chemistry_percentage));
+fprintf (fp, "History\t\t%d/%d\t\t%c\n",history_correct, num_of_historyquestions,grade (history_percentage));
+fprintf (fp, "Biology\t\t%d/%d\t\t%c\n",biology_correct, num_of_biologyquestions,grade (biology_percentage));
 fprintf (fp, "****************************************\n");
-fprintf (fp, "Total\t\t%d/%d\t\t%c\n",maths_correct+physics_correct+chemistry_correct, num_of_chemistryquestions+num_of_mathquestions+num_of_physicsquestions, grade(total_percentage));
+fprintf (fp, "Total\t\t%d/%d\t\t%c\n",maths_correct+physics_correct+chemistry_correct+history_correct+biology_correct, num_of_chemistryquestions+num_of_mathquestions+num_of_physicsquestions+num_of_historyquestions+num_of_biologyquestions, grade(total_percentage));
 fprintf (fp, "****************************************\n");
 
 fclose (fp);

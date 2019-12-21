@@ -1,12 +1,14 @@
-Student Name:	 Abdullah Qureshi
+Student Name:	 sadsadsad sadas
 
-Roll No:	 123121
+Roll No:	 asdasd
 
 Subject		Score		Grade
 
-Math		1/10		F
+Math		0/10		F
 Physics		0/10		F
 Chemistry	0/10		F
+History		0/10		F
+Biology		0/10		F
 ****************************************
-Total		1/30		F
+Total		0/50		F
 ****************************************
